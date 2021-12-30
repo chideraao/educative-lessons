@@ -1,5 +1,6 @@
 import logo from "./logo/Firebase.png";
 import "./App.css";
+import "./services/firebase";
 
 function App() {
   return (
