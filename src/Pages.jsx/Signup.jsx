@@ -1,4 +1,8 @@
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import {
+  AuthErrorCodes,
+  createUserWithEmailAndPassword,
+  getAuth,
+} from "firebase/auth";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { firebaseApp } from "../services/firebase";
@@ -22,17 +26,17 @@ function Signup() {
         // ...
       })
       .catch((err) => {
-        console.log(err.code);
-        console.log(err.message);
+        if (err.code === AuthErrorCodes.WEAK_PASSWORD) {
+          alert("The password is too weak");
+        }
       });
   };
 
   const handleChange = (e) => {
-    const target = e.target;
-    const value = target.type === "checkbox" ? target.checked : target.value;
-    const name = target.name;
-
-    setInput((prevState) => ({ ...prevState, [name]: value }));
+    setInput((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   return (

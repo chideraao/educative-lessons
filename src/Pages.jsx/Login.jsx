@@ -1,4 +1,10 @@
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithRedirect,
+  GithubAuthProvider,
+} from "firebase/auth";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { firebaseApp } from "../services/firebase";
@@ -23,7 +29,44 @@ function Login() {
       })
       .catch((err) => {
         console.log(err.code);
-        console.log(err.message);
+        setError(err.code);
+      });
+  };
+
+  const googleSignIn = () => {
+    const provider = new GoogleAuthProvider();
+
+    signInWithRedirect(auth, provider)
+      .then((result) => {
+        console.log(result);
+        console.log(result.user);
+        // ...
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        setError(error.code);
+        console.log(error.code);
+        // The email of the user's account used.
+
+        // ...
+      });
+  };
+
+  const githubSignIn = () => {
+    const provider = new GithubAuthProvider();
+
+    signInWithRedirect(auth, provider)
+      .then((result) => {
+        console.log(result.user);
+        // ...
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        setError(error.code);
+        console.log(error.code);
+        // The email of the user's account used.
+
+        // ...
       });
   };
 
@@ -73,6 +116,21 @@ function Login() {
         </div>
       </form>
       <div className="option">
+        or <br />
+        <button
+          title="Sign in with Google"
+          aria-label="Sign in with Google"
+          onClick={googleSignIn}
+        >
+          Sign in with Google
+        </button>
+        <button
+          title="Sign in with Github"
+          aria-label="Sign in with Github"
+          onClick={githubSignIn}
+        >
+          Sign in with Github
+        </button>
         <p>
           Don't have an account?
           <Link to="/signup">Sign Up</Link>

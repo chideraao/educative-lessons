@@ -58,7 +58,6 @@
 }
 
 .form-body button {
-  margin-right: 1rem;
-  margin-bottom: 1rem;
+  margin: 1rem;
   padding: 0.2rem 0.5rem;
 }
