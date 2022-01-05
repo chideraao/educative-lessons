@@ -9,10 +9,7 @@ import "./App.css";
 import Home from "./Pages.jsx/Home";
 import Login from "./Pages.jsx/Login";
 import Signup from "./Pages.jsx/Signup";
-import { firebaseApp } from "./services/firebase";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-
-const auth = getAuth(firebaseApp);
+import { handleAuthState } from "./helpers/auth";
 
 // Higher order component for public pages
 function PrivateRoute({ authenticated, children }) {
@@ -28,13 +25,7 @@ function App() {
   const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setAuthenticated(true);
-      } else {
-        setAuthenticated(false);
-      }
-    });
+    handleAuthState(setAuthenticated);
 
     return () => {};
   }, []);
