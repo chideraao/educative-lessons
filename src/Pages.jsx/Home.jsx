@@ -1,13 +1,15 @@
-import { getAuth, signOut } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import React from "react";
+import { logOut } from "../helpers/auth";
 import logo from "../logo/Firebase.png";
 import { firebaseApp } from "../services/firebase";
 
 function Home() {
   const auth = getAuth(firebaseApp);
 
+  // sign out click handler
   var handleClick = () => {
-    signOut(auth);
+    logOut();
   };
 
   return (
