@@ -1,73 +1,28 @@
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithRedirect,
-  GithubAuthProvider,
-} from "firebase/auth";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { firebaseApp } from "../services/firebase";
+import { signIn, signInWithGithub, signInWithGoogle } from "../helpers/auth";
 
 function Login() {
   const [input, setInput] = useState({ email: "", password: "" });
-  const [error, setError] = useState(null);
 
-  const auth = getAuth(firebaseApp);
-
+  // sign in submit handler
   const handleSubmit = (e) => {
     e.preventDefault();
-    setError("");
     let email = input.email.toLowerCase().trim();
     let password = input.password;
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed up
-        console.log(userCredential.user);
-        // ...
-      })
-      .catch((err) => {
-        console.log(err.code);
-        setError(err.code);
-      });
+    // sign in function
+    signIn(email, password);
   };
 
+  // Google click handler
   const googleSignIn = () => {
-    const provider = new GoogleAuthProvider();
-
-    signInWithRedirect(auth, provider)
-      .then((result) => {
-        console.log(result);
-        console.log(result.user);
-        // ...
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        setError(error.code);
-        console.log(error.code);
-        // The email of the user's account used.
-
-        // ...
-      });
+    signInWithGoogle();
   };
 
+  // Github click handler
   const githubSignIn = () => {
-    const provider = new GithubAuthProvider();
-
-    signInWithRedirect(auth, provider)
-      .then((result) => {
-        console.log(result.user);
-        // ...
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        setError(error.code);
-        console.log(error.code);
-        // The email of the user's account used.
-
-        // ...
-      });
+    signInWithGithub();
   };
 
   const handleChange = (e) => {
@@ -109,7 +64,6 @@ function Login() {
           </label>
         </div>
         <div className="btn">
-          {error ? <p className="login-error">{error}</p> : null}
           <button title="Login" aria-label="Login" type="submit">
             Login
           </button>

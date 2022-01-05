@@ -1,35 +1,18 @@
-import {
-  AuthErrorCodes,
-  createUserWithEmailAndPassword,
-  getAuth,
-} from "firebase/auth";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { firebaseApp } from "../services/firebase";
+import { signUp } from "../helpers/auth";
 
 function Signup() {
   const [input, setInput] = useState({ email: "", password: "" });
-  const [error, setError] = useState(null);
 
-  const auth = getAuth(firebaseApp);
-
+  // sign up submit handler
   const handleSubmit = (e) => {
     e.preventDefault();
-    setError("");
     let email = input.email.toLowerCase().trim();
     let password = input.password;
 
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        console.log(userCredential.user);
-        // ...
-      })
-      .catch((err) => {
-        if (err.code === AuthErrorCodes.WEAK_PASSWORD) {
-          alert("The password is too weak");
-        }
-      });
+    // sign up handler
+    signUp(email, password);
   };
 
   const handleChange = (e) => {
@@ -71,7 +54,6 @@ function Signup() {
           </label>
         </div>
         <div className="btn">
-          {error ? <p className="login-error">{error}</p> : null}
           <button title="Sign up" aria-label="Signup" type="submit">
             Create account
           </button>
