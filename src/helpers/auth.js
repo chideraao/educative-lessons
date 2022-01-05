@@ -4,6 +4,7 @@ import {
   getAuth,
   GithubAuthProvider,
   GoogleAuthProvider,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -11,6 +12,19 @@ import {
 import { firebaseApp } from "../services/firebase";
 
 const auth = getAuth(firebaseApp);
+
+// monitor auth status function
+export const handleAuthState = (setAuth) => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setAuth(true);
+      console.log(user.email);
+    } else {
+      setAuth(false);
+      console.log(user);
+    }
+  });
+};
 
 // sign out function
 export const logOut = () => {
@@ -28,9 +42,10 @@ export const signUp = (email, password) => {
     .catch((err) => {
       if (err.code === AuthErrorCodes.WEAK_PASSWORD) {
         alert("The password is too weak");
+      } else {
+        console.log(err.code);
+        alert(err.code);
       }
-      console.log(err.code);
-      alert(err.code);
     });
 };
 
