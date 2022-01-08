@@ -8,17 +8,38 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import { firebaseApp } from "../services/firebase";
 
 const auth = getAuth(firebaseApp);
+
+// update user profile
+export const profileUpdate = (displayName) => {
+  updateProfile(auth.currentUser, {
+    displayName,
+  })
+    .then(() => {
+      // Profile updated!
+      alert("Profile updated");
+      // ...
+    })
+    .catch((error) => {
+      // An error occurred
+      // ...
+    });
+};
 
 // monitor auth status function
 export const handleAuthState = (setAuth) => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       setAuth(true);
+      console.log(user);
       console.log(user.email);
+      console.log(user.displayName);
+      console.log(user.photoURL);
+      console.log(user.emailVerified);
     } else {
       setAuth(false);
       console.log(user);
@@ -40,8 +61,11 @@ export const signUp = (email, password) => {
       // ...
     })
     .catch((err) => {
-      if (err.code === AuthErrorCodes.WEAK_PASSWORD) {
-        alert("The password is too weak");
+      if (
+        err.code === AuthErrorCodes.INVALID_PASSWORD ||
+        err.code === AuthErrorCodes.USER_DELETED
+      ) {
+        alert("Email or password might be incorrect");
       } else {
         console.log(err.code);
         alert(err.code);
