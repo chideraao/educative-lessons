@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
+  line-height: 1.6;
 }
 
 .App {
@@ -60,4 +61,12 @@
 .form-body button {
   margin: 1rem;
   padding: 0.2rem 0.5rem;
+}
+
+.home span {
+  font-size: 1rem;
+}
+
+.home .display-container {
+  margin-bottom: 2rem;
 }
