@@ -1,6 +1,7 @@
 import {
   AuthErrorCodes,
   createUserWithEmailAndPassword,
+  deleteUser,
   getAuth,
   GithubAuthProvider,
   GoogleAuthProvider,
@@ -13,6 +14,19 @@ import {
 import { firebaseApp } from "../services/firebase";
 
 const auth = getAuth(firebaseApp);
+
+export const userDelete = () => {
+  deleteUser(auth.currentUser)
+    .then(() => {
+      // User deleted.
+      alert("User deleted successfully");
+    })
+    .catch((error) => {
+      // An error occurred
+      console.log(error);
+      // ...
+    });
+};
 
 // update user profile
 export const profileUpdate = (displayName) => {
