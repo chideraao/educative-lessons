@@ -67,6 +67,6 @@
   font-size: 1rem;
 }
 
-.home .display-container {
-  margin-bottom: 2rem;
+.home button[title="delete account"] {
+  color: red;
 }

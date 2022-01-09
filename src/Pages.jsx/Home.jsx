@@ -1,12 +1,10 @@
 import { getAuth } from "firebase/auth";
-import React, { useState } from "react";
-import { logOut, profileUpdate } from "../helpers/auth";
+import React from "react";
+import { logOut, userDelete } from "../helpers/auth";
 import logo from "../logo/Firebase.png";
 import { firebaseApp } from "../services/firebase";
 
 function Home() {
-  const [displayName, setdisplayName] = useState("");
-
   const auth = getAuth(firebaseApp);
 
   // sign out click handler
@@ -14,13 +12,8 @@ function Home() {
     logOut();
   };
 
-  var handleChange = (e) => {
-    setdisplayName(e.target.value);
-  };
-
-  var handleUpdateClick = () => {
-    profileUpdate(displayName);
-    setdisplayName("");
+  var handleDeleteClick = () => {
+    userDelete();
   };
 
   return (
@@ -35,31 +28,15 @@ function Home() {
       <button title="signout" aria-label="signout" onClick={handleClick}>
         Signout
       </button>
+      <button
+        title="delete account"
+        aria-label="delete account"
+        onClick={handleDeleteClick}
+      >
+        Delete account
+      </button>
 
       <div className="App-main">
-        <div className="display-container">
-          <div className="display-input">
-            <input
-              name="display name"
-              type="text"
-              placeholder="Enter display name"
-              onChange={handleChange}
-              value={displayName}
-              required
-              autoComplete="true"
-            />
-            <label htmlFor="display name" className="label-name">
-              <span className="content-name">Display Name</span>
-            </label>
-            <button
-              title="signout"
-              aria-label="signout"
-              onClick={handleUpdateClick}
-            >
-              Update Profile
-            </button>
-          </div>
-        </div>
         <img src={logo} className="App-logo" alt="logo" />
         Welcome to Firebase Auth <br />
       </div>
