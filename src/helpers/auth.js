@@ -3,7 +3,6 @@ import {
   createUserWithEmailAndPassword,
   deleteUser,
   getAuth,
-  setPersistence,
   GithubAuthProvider,
   GoogleAuthProvider,
   onAuthStateChanged,
@@ -11,24 +10,10 @@ import {
   signInWithPopup,
   signOut,
   updateProfile,
-  inMemoryPersistence,
 } from "firebase/auth";
 import { firebaseApp } from "../services/firebase";
 
 const auth = getAuth(firebaseApp);
-
-// sign in function with Google
-export const signInWithGoogle = () => {
-  setPersistence(auth, inMemoryPersistence)
-    .then((result) => {
-      const provider = new GoogleAuthProvider();
-      return signInWithPopup(auth, provider);
-    })
-    .catch((err) => {
-      console.log(err.code);
-      alert(err.code);
-    });
-};
 
 export const userDelete = () => {
   deleteUser(auth.currentUser)
@@ -108,6 +93,24 @@ export const signIn = (email, password) => {
     .then((userCredential) => {
       // Signed up
       console.log(userCredential.user);
+      // ...
+    })
+    .catch((err) => {
+      console.log(err.code);
+      alert(err.code);
+    });
+};
+
+// sign in function with Google
+export const signInWithGoogle = () => {
+  const provider = new GoogleAuthProvider();
+
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      console.log(result);
+      console.log(result.user);
+      const userrr = result.user;
+      console.log(userrr);
       // ...
     })
     .catch((err) => {

@@ -1,5 +1,6 @@
 import { getAuth } from "firebase/auth";
 import React from "react";
+import AddTask from "../components/AddTask";
 import { logOut, userDelete } from "../helpers/auth";
 import logo from "../logo/Firebase.png";
 import { firebaseApp } from "../services/firebase";
@@ -28,18 +29,7 @@ function Home() {
       <button title="signout" aria-label="signout" onClick={handleClick}>
         Signout
       </button>
-      <button
-        title="delete account"
-        aria-label="delete account"
-        onClick={handleDeleteClick}
-      >
-        Delete account
-      </button>
-
-      <div className="App-main">
-        <img src={logo} className="App-logo" alt="logo" />
-        Welcome to Firebase Auth <br />
-      </div>
+      <AddTask />
     </div>
   );
 }

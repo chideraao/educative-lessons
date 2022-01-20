@@ -17,6 +17,7 @@
 }
 
 .home {
+  height: 100%;
   background-color: #282c34;
   color: white;
   padding-top: 2rem;
