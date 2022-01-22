@@ -41,6 +41,7 @@ function Login() {
           <input
             name="email"
             type="text"
+            placeholder="Enter email"
             onChange={handleChange}
             value={input.email}
             required
@@ -53,6 +54,7 @@ function Login() {
         <div className="password-input">
           <input
             name="password"
+            placeholder="Enter password"
             onChange={handleChange}
             value={input.password}
             type="password"

@@ -1,8 +1,7 @@
 import { getAuth } from "firebase/auth";
 import React from "react";
 import AddTask from "../components/AddTask";
-import { logOut, userDelete } from "../helpers/auth";
-import logo from "../logo/Firebase.png";
+import { logOut } from "../helpers/auth";
 import { firebaseApp } from "../services/firebase";
 
 function Home() {
@@ -11,10 +10,6 @@ function Home() {
   // sign out click handler
   var handleClick = () => {
     logOut();
-  };
-
-  var handleDeleteClick = () => {
-    userDelete();
   };
 
   return (

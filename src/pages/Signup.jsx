@@ -30,6 +30,7 @@ function Signup() {
         <div className="email-input">
           <input
             name="email"
+            placeholder="Enter email"
             type="text"
             onChange={handleChange}
             value={input.email}
@@ -43,6 +44,7 @@ function Signup() {
         <div className="password-input">
           <input
             name="password"
+            placeholder="Enter password"
             onChange={handleChange}
             value={input.password}
             type="password"
