@@ -1,7 +1,8 @@
 import { getAuth } from "firebase/auth";
-import React from "react";
-import { logOut, userDelete } from "../helpers/auth";
-import logo from "../logo/Firebase.png";
+import React, { useEffect } from "react";
+import AddTask from "../components/AddTask";
+import { logOut } from "../helpers/auth";
+import { getDataOnce } from "../helpers/database";
 import { firebaseApp } from "../services/firebase";
 
 function Home() {
@@ -12,9 +13,9 @@ function Home() {
     logOut();
   };
 
-  var handleDeleteClick = () => {
-    userDelete();
-  };
+  useEffect(() => {
+    getDataOnce();
+  }, []);
 
   return (
     <div className="home">
@@ -28,18 +29,7 @@ function Home() {
       <button title="signout" aria-label="signout" onClick={handleClick}>
         Signout
       </button>
-      <button
-        title="delete account"
-        aria-label="delete account"
-        onClick={handleDeleteClick}
-      >
-        Delete account
-      </button>
-
-      <div className="App-main">
-        <img src={logo} className="App-logo" alt="logo" />
-        Welcome to Firebase Auth <br />
-      </div>
+      <AddTask />
     </div>
   );
 }

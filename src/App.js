@@ -6,9 +6,9 @@ import {
   Navigate,
 } from "react-router-dom";
 import "./App.css";
-import Home from "./Pages.jsx/Home";
-import Login from "./Pages.jsx/Login";
-import Signup from "./Pages.jsx/Signup";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import { handleAuthState } from "./helpers/auth";
 
 // Higher order component for public pages
