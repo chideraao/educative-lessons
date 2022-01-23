@@ -49,11 +49,7 @@ export const handleAuthState = (setAuth) => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       setAuth(true);
-      console.log(user);
       console.log(user.email);
-      console.log(user.displayName);
-      console.log(user.photoURL);
-      console.log(user.emailVerified);
     } else {
       setAuth(false);
       console.log(user);

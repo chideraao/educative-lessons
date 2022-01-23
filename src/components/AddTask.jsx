@@ -1,4 +1,3 @@
-import { getAuth } from "firebase/auth";
 import React, { useState } from "react";
 import { addNewTask } from "../helpers/database";
 
@@ -21,7 +20,7 @@ function AddTask() {
   };
 
   return (
-    <div>
+    <div className="task-form">
       <div className="form-input">
         <form onSubmit={handleSubmit}>
           <input
@@ -35,6 +34,7 @@ function AddTask() {
           <label htmlFor="task" className="label-name">
             <span className="content-name">Task</span>
           </label>
+          <br />
           <select
             name="difficulty"
             id="difficulty"

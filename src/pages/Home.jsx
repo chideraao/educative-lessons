@@ -1,7 +1,8 @@
 import { getAuth } from "firebase/auth";
-import React from "react";
+import React, { useEffect } from "react";
 import AddTask from "../components/AddTask";
 import { logOut } from "../helpers/auth";
+import { getDataOnce } from "../helpers/database";
 import { firebaseApp } from "../services/firebase";
 
 function Home() {
@@ -11,6 +12,10 @@ function Home() {
   var handleClick = () => {
     logOut();
   };
+
+  useEffect(() => {
+    getDataOnce();
+  }, []);
 
   return (
     <div className="home">
