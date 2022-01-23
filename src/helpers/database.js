@@ -1,4 +1,4 @@
-import { getDatabase, onValue, ref, set } from "firebase/database";
+import { getDatabase, onValue, push, ref } from "firebase/database";
 import { firebaseApp } from "../services/firebase";
 
 // initialise database
@@ -9,7 +9,7 @@ const tasksRef = ref(db, "tasks");
 
 // basic write operation
 export const addNewTask = (task, difficulty, setInput) => {
-  set(tasksRef, {
+  push(tasksRef, {
     task,
     difficulty,
   })
