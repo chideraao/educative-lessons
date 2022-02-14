@@ -22,12 +22,7 @@ console.log(typeof query);
 // reference to database path
 const tasksRef = ref(db, "tasks");
 
-const filteredTasksRef = query(
-  tasksRef,
-  orderByChild("difficulty"),
-  equalTo("easy"),
-  limitToLast(2)
-);
+const filteredTasksRef = query(tasksRef, limitToLast(2));
 
 // basic write operation
 export const addNewTask = (task, difficulty, setInput) => {
