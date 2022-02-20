@@ -1,11 +1,22 @@
-import { getDatabase, onValue, push, ref } from "firebase/database";
+import {
+  getDatabase,
+  limitToLast,
+  onValue,
+  push,
+  query,
+  ref,
+} from "firebase/database";
 import { firebaseApp } from "../services/firebase";
 
 // initialise database
 const db = getDatabase(firebaseApp);
 
+console.log(typeof query);
+
 // reference to database path
 const tasksRef = ref(db, "tasks");
+
+const filteredTasksRef = query(tasksRef, limitToLast(2));
 
 // basic write operation
 export const addNewTask = (task, difficulty, setInput) => {
@@ -21,8 +32,8 @@ export const addNewTask = (task, difficulty, setInput) => {
     });
 };
 
-export const getDataOnce = () => {
-  onValue(tasksRef, (snapshot) => {
+export const getData = () => {
+  onValue(filteredTasksRef, (snapshot) => {
     const data = snapshot.val();
     console.log(data);
   });

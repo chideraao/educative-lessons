@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { addNewTask } from "../helpers/database";
+import { documentWrite } from "../helpers/firestore";
 
 function AddTask() {
   const [input, setInput] = useState({ task: "", difficulty: "easy" });
@@ -16,7 +16,7 @@ function AddTask() {
 
     let { task, difficulty } = input;
 
-    addNewTask(task, difficulty, setInput);
+    documentWrite(task, difficulty, setInput);
   };
 
   return (
