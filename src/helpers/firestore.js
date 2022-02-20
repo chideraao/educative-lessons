@@ -1,13 +1,4 @@
-import {
-  addDoc,
-  collection,
-  doc,
-  getFirestore,
-  setDoc,
-  updateDoc,
-  deleteDoc,
-  deleteField,
-} from "firebase/firestore";
+import { doc, getFirestore, setDoc, deleteDoc } from "firebase/firestore";
 import { firebaseApp } from "../services/firebase";
 
 const firestore = getFirestore(firebaseApp);
@@ -23,14 +14,10 @@ export const deleteDocument = () => {
 };
 
 export const documentWrite = (task, difficulty, setInput) => {
-  setDoc(
-    docsRef,
-    {
-      task: "Learn K8s",
-      difficulty: deleteField(),
-    },
-    { merge: true }
-  )
+  setDoc(docsRef, {
+    task,
+    difficulty,
+  })
     .then(() => {
       setInput({ task: "", difficulty: "easy" });
     })
