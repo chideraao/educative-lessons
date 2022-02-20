@@ -1,16 +1,10 @@
 import {
-  equalTo,
   getDatabase,
-  limitToFirst,
   limitToLast,
   onValue,
-  orderByChild,
-  orderByKey,
-  orderByValue,
   push,
   query,
   ref,
-  update,
 } from "firebase/database";
 import { firebaseApp } from "../services/firebase";
 

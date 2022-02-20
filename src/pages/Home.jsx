@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import AddTask from "../components/AddTask";
 import { logOut } from "../helpers/auth";
 import { getData } from "../helpers/database";
+import { deleteDocument } from "../helpers/firestore";
 import { firebaseApp } from "../services/firebase";
 
 function Home() {
@@ -11,6 +12,11 @@ function Home() {
   // sign out click handler
   var handleClick = () => {
     logOut();
+  };
+
+  // delete click handler
+  var handleDelete = () => {
+    deleteDocument();
   };
 
   useEffect(() => {
@@ -28,6 +34,13 @@ function Home() {
       </p>
       <button title="signout" aria-label="signout" onClick={handleClick}>
         Signout
+      </button>{" "}
+      <button
+        title="delete document"
+        aria-label="signout"
+        onClick={handleDelete}
+      >
+        Delete Document
       </button>
       <AddTask />
     </div>
