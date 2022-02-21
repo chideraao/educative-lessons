@@ -2,8 +2,12 @@ import { getAuth } from "firebase/auth";
 import React, { useEffect } from "react";
 import AddTask from "../components/AddTask";
 import { logOut } from "../helpers/auth";
-import { getData } from "../helpers/database";
-import { deleteDocument } from "../helpers/firestore";
+import {
+  deleteDocument,
+  docListener,
+  retrieveDoc,
+  retrieveDocs,
+} from "../helpers/firestore";
 import { firebaseApp } from "../services/firebase";
 
 function Home() {
@@ -20,7 +24,9 @@ function Home() {
   };
 
   useEffect(() => {
-    getData();
+    retrieveDoc();
+    retrieveDocs();
+    docListener();
   }, []);
 
   return (
