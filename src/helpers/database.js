@@ -11,8 +11,6 @@ import { firebaseApp } from "../services/firebase";
 // initialise database
 const db = getDatabase(firebaseApp);
 
-console.log(typeof query);
-
 // reference to database path
 const tasksRef = ref(db, "tasks");
 
@@ -33,8 +31,5 @@ export const addNewTask = (task, difficulty, setInput) => {
 };
 
 export const getData = () => {
-  onValue(filteredTasksRef, (snapshot) => {
-    const data = snapshot.val();
-    console.log(data);
-  });
+  onValue(filteredTasksRef, (snapshot) => {});
 };
