@@ -79,7 +79,7 @@
   justify-content: center;
 }
 
-.home .task-form input[name="task"],
+.home .task-form input[name="upload"],
 .home .task-form select {
   margin: 0.5rem;
   padding: 0.2rem 0.5rem;

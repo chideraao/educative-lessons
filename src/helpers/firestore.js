@@ -38,7 +38,7 @@ export const retrieveDocs = async () => {
 export const docListener = () => {
   onSnapshot(docRef, (docSnapshot) => {
     if (docSnapshot.exists()) {
-      // console.log(docSnapshot.data());
+      console.log(docSnapshot.data());
     }
   });
 };
@@ -48,7 +48,7 @@ export const retrieveDoc = async () => {
 
   if (docSnapshot.exists()) {
     const docData = docSnapshot.data();
-    // console.log(docData);
+    console.log(docData);
   }
 };
 
