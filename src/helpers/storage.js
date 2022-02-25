@@ -1,10 +1,26 @@
-import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import {
+  deleteObject,
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytes,
+} from "firebase/storage";
 import { firebaseApp } from "../services/firebase";
 
 const storage = getStorage(firebaseApp);
 
 // reference to educative directory
 const educativeRef = ref(storage, "images/logo.png");
+
+export const deleteFile = () => {
+  deleteObject(educativeRef)
+    .then(() => {
+      alert("File deleted successfully");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 export const fileUpload = (image) => {
   const metadata = {
