@@ -90,3 +90,9 @@
 .home button[title="submit"] {
   margin-right: 4rem;
 }
+
+.home img {
+  height: 15rem;
+  width: auto;
+  margin-top: 1rem;
+}
