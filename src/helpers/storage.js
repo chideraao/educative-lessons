@@ -1,4 +1,4 @@
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { firebaseApp } from "../services/firebase";
 
 const storage = getStorage(firebaseApp);
@@ -14,6 +14,17 @@ export const fileUpload = (image) => {
   uploadBytes(educativeRef, image, metadata)
     .then((snapshot) => {
       alert("File uploaded successfully");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const fileDownload = (setURL) => {
+  getDownloadURL(educativeRef)
+    .then((url) => {
+      console.log(url);
+      setURL(url);
     })
     .catch((err) => {
       console.log(err);

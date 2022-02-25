@@ -1,17 +1,13 @@
 import { getAuth } from "firebase/auth";
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import AddTask from "../components/AddTask";
 import { logOut } from "../helpers/auth";
-import {
-  deleteDocument,
-  docListener,
-  retrieveDoc,
-  retrieveDocs,
-} from "../helpers/firestore";
+import { fileDownload } from "../helpers/storage";
 import { firebaseApp } from "../services/firebase";
 
 function Home() {
   const auth = getAuth(firebaseApp);
+  const [URL, setURL] = useState("");
 
   // sign out click handler
   var handleClick = () => {
@@ -19,15 +15,9 @@ function Home() {
   };
 
   // delete click handler
-  var handleDelete = () => {
-    deleteDocument();
+  var showImage = () => {
+    fileDownload(setURL);
   };
-
-  useEffect(() => {
-    retrieveDoc();
-    retrieveDocs();
-    docListener();
-  }, []);
 
   return (
     <div className="home">
@@ -41,13 +31,10 @@ function Home() {
       <button title="signout" aria-label="signout" onClick={handleClick}>
         Signout
       </button>{" "}
-      <button
-        title="delete document"
-        aria-label="signout"
-        onClick={handleDelete}
-      >
-        Delete Document
+      <button title="show image" aria-label="show-image" onClick={showImage}>
+        Show Image
       </button>
+      {URL ? <img src={URL} alt="from storage bucket" /> : ""}
       <AddTask />
     </div>
   );

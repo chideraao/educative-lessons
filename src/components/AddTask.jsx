@@ -18,7 +18,7 @@ function AddTask() {
             name="upload"
             type="file"
             ref={fileInput}
-            // accept="image/*,pdf/*"
+            accept="image/*,application/pdf"
             required
           />
           <label htmlFor="upload image" className="label-name">
