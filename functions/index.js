@@ -3,13 +3,10 @@ const admin = require("firebase-admin");
 
 admin.initializeApp();
 
-// http callable function
-exports.helloFromEducative = functions.https.onCall((data, context) => {
-  const name = context.auth.token.name || "user";
-  // const picture = context.auth.token.picture || null;
-  // const email = context.auth.token.email || null;
-
-  return `Hello ${name} from Educative`;
+// auth background trigger
+exports.userSignup = functions.auth.user().onCreate((user) => {
+  console.log("user created", user.displayName, user.uid);
+  return null;
 });
 
 // http request function

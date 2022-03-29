@@ -7,7 +7,11 @@ const functions = getFunctions(firebaseApp);
 export const sayHello = () => {
   const helloFromEducative = httpsCallable(functions, "helloFromEducative");
 
-  helloFromEducative({ name: "John" }).then((result) => {
-    alert(result.data);
-  });
+  helloFromEducative()
+    .then((result) => {
+      alert(result.data);
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
 };
