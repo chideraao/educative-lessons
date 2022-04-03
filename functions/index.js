@@ -4,8 +4,10 @@ const admin = require("firebase-admin");
 admin.initializeApp();
 
 // function responds with "Firebase course on Educative"
-exports.firebaseOnEducative = functions.https.onRequest((request, response) => {
-  response.send(`${process.env.COURSE} course on ${process.env.PLATFORM}`);
+exports.helloUser = functions.https.onRequest((request, response) => {
+  const { name, email } = functions.config().user;
+
+  response.send(`Hello ${name}! Your email is ${email}`);
 });
 
 // auth background trigger

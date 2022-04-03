@@ -3,7 +3,6 @@ import React from "react";
 import { logOut } from "../helpers/auth";
 import { firebaseApp } from "../services/firebase";
 import FirebaseLogo from "../logo/Firebase.png";
-import { sayHello } from "../helpers/functions";
 
 function Home() {
   const auth = getAuth(firebaseApp);
@@ -11,10 +10,6 @@ function Home() {
   // sign out click handler
   var handleClick = () => {
     logOut();
-  };
-
-  const handleHelloClick = () => {
-    sayHello();
   };
 
   return (
@@ -28,13 +23,6 @@ function Home() {
       </p>
       <button title="signout" aria-label="signout" onClick={handleClick}>
         Signout
-      </button>
-      <button
-        title="say-hello"
-        aria-label="say-hello"
-        onClick={handleHelloClick}
-      >
-        Say Hello
       </button>
       <div className="">
         <img src={FirebaseLogo} alt="firebase logo" />
