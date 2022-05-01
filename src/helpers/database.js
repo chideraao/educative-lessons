@@ -1,4 +1,5 @@
 import {
+  connectDatabaseEmulator,
   getDatabase,
   limitToLast,
   onValue,
@@ -10,6 +11,10 @@ import { firebaseApp } from "../services/firebase";
 
 // initialise database
 const db = getDatabase(firebaseApp);
+
+if (window.location.hostname === "localhost") {
+  connectDatabaseEmulator(db, "localhost", "9000");
+}
 
 // reference to database path
 const tasksRef = ref(db, "tasks");
@@ -31,5 +36,8 @@ export const addNewTask = (task, difficulty, setInput) => {
 };
 
 export const getData = () => {
-  onValue(filteredTasksRef, (snapshot) => {});
+  onValue(filteredTasksRef, (snapshot) => {
+    const data = snapshot.val();
+    console.log("Data snapshot: ", data);
+  });
 };

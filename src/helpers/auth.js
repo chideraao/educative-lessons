@@ -1,5 +1,6 @@
 import {
   AuthErrorCodes,
+  connectAuthEmulator,
   createUserWithEmailAndPassword,
   deleteUser,
   getAuth,
@@ -14,6 +15,10 @@ import {
 import { firebaseApp } from "../services/firebase";
 
 const auth = getAuth(firebaseApp);
+
+if (window.location.hostname === "localhost") {
+  connectAuthEmulator(auth, "http://localhost:9099");
+}
 
 export const userDelete = () => {
   deleteUser(auth.currentUser)
