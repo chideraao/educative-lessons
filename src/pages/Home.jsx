@@ -1,8 +1,9 @@
 import { getAuth } from "firebase/auth";
 import React from "react";
+import AddTask from "../components/AddTask";
 import { logOut } from "../helpers/auth";
+import { deleteDocument } from "../helpers/firestore";
 import { firebaseApp } from "../services/firebase";
-import FirebaseLogo from "../logo/Firebase.png";
 
 function Home() {
   const auth = getAuth(firebaseApp);
@@ -10,6 +11,11 @@ function Home() {
   // sign out click handler
   var handleClick = () => {
     logOut();
+  };
+
+  // delete click handler
+  var handleDelete = () => {
+    deleteDocument();
   };
 
   return (
@@ -23,10 +29,15 @@ function Home() {
       </p>
       <button title="signout" aria-label="signout" onClick={handleClick}>
         Signout
+      </button>{" "}
+      <button
+        title="delete document"
+        aria-label="signout"
+        onClick={handleDelete}
+      >
+        Delete Document
       </button>
-      <div className="">
-        <img src={FirebaseLogo} alt="firebase logo" />
-      </div>
+      <AddTask />
     </div>
   );
 }
